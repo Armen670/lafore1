@@ -43,6 +43,6 @@ public:
 
 };
 int main() {
-    book a;type b;a.getdata();b.getdata();a.putdata();b.putdata();
+    book a;type b;a.getdata();b.getdata();a.putdata();b.putdata();int asd =4486486;
     return 0;
 }
