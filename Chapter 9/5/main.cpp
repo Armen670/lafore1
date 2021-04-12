@@ -1,10 +1,12 @@
 #include <iostream>
 using namespace std;
+
+enum period {hour,week,month};
 const int LEN = 80; // максимальная длина имени
 ///////////////////////////////////////////////////////////
 class employee // некий сотрудник
 {
-private:
+protected:
     char name[LEN]; // имя сотрудника
     unsigned long number; // номер сотрудника
 public:
@@ -22,9 +24,9 @@ public:
 ///////////////////////////////////////////////////////////
 class manager : public employee // менеджер
 {
-private:
-    char title[LEN]; // должность, например вице-президент
-    double dues; // сумма взносов в гольф-клуб
+protected:
+    char title[LEN];double dues;// должность, например вице-президент
+    // сумма взносов в гольф-клуб
 public:
     void getdata()
     {
@@ -42,7 +44,7 @@ public:
 ///////////////////////////////////////////////////////////
 class scientist : public employee // ученый
 {
-private:
+protected:
     int pubs; // количество публикаций
 public:
     void getdata()
@@ -60,12 +62,65 @@ public:
 class laborer : public employee // рабочий
 {
 };
+class employee2: public employee{
+protected:
+    double comp;period Period;//comp=compensation;
+public:
+    void getdata(){
+        employee::getdata();
+        cout <<"How much compensation of this employee: ";cin >>comp;char a;
+        cout <<"How is thee compensation is calculated, for hour (h), for week (w),for month(m)?";cin >>a;
+        switch (a){
+            case 'w':Period=week;break;
+            case 'h':Period=hour;break;
+            case 'm':Period-month;break;
+        }
+    }
+    void putdata(){
+        employee::putdata();
+        cout <<"Compensation:"<<comp<<endl<<"For "<<Period;
+    }
+};
+class manager2 : public manager, public employee2{
+public:
+    void getdata(){
+        employee2::getdata();
+        cout << " Введите должность: "; cin >> title;
+        cout << " Введите сумму взносов в гольф-клуб: "; cin >> dues;
+    }
+    void putdata(){
+        employee2::putdata();
+        cout << "\n Position: " << title;
+        cout << "\n Amount of contributions to the golf club: " << dues;
+    }
+};
+class scientist2 : public scientist,public employee2{
+public:
+    void getdata(){
+        employee2::getdata();
+        cout << "Enter numbers of publications: "; cin >> pubs;
+    }
+    void putdata(){
+        employee2::putdata();
+        cout << "\n Number of publications: " << pubs;
+    }
+
+};
+class laborer2 : public laborer, public employee2{
+public:
+    void getdata(){
+        employee2::getdata();
+    }
+    void putdata(){
+        employee2::putdata();
+    }
+};
 ///////////////////////////////////////////////////////////
 int main()
 {
-    manager m1, m2;
-    scientist s1;
-    laborer l1;
+    manager2 m1, m2;
+    scientist2 s1;
+    laborer2 l1;
     // введем информацию о нескольких сотрудниках
     cout << endl;
     cout << "\nВвод информации о первом менеджере";
