@@ -44,11 +44,11 @@ int main()
         cin >> choice;
     }
     while(choice == 'y');
-    cout << "\nНеотсортированный список:";
+    cout << "\nUnsorted list:";
     for(int j = 0; j < n; j++) // покажем неотсортированный список
         persPtr[j]->printData();
     salsort(persPtr,n);//bsort(persPtr, n); // отсортируем указатели
-    cout << "\nОтсортированный список:";
+    cout << "\nSorted list:";
     for(int j = 0; j < n; j++) // покажем отсортированный список
         persPtr[j]->printData();
     cout << endl;
